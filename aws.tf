@@ -13,7 +13,11 @@ provider "aws" {
   access_key = var.AWS_ACCESS_KEY_ID
   secret_key = var.AWS_SECRET_ACCESS_KEY
 
-  assume_role {
-    role_arn     = "arn:aws:iam::${var.AWS_ACCOUNT_ID}:role/${var.AWS_CROSS_ACCOUNT_ROLE}"
+  dynamic assume_role {
+    for_each = var.AWS_ACCOUNT_ID == "" ? [] : [1]  
+    
+    content { 
+        role_arn     = "arn:aws:iam::${var.AWS_ACCOUNT_ID}:role/${var.AWS_CROSS_ACCOUNT_ROLE}"
+    }
   }
 }

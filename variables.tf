@@ -12,6 +12,7 @@ variable "AWS_SECRET_ACCESS_KEY" {
 
 variable "AWS_ACCOUNT_ID" {
   type = string
+  default = ""
 }
 
 variable "AWS_CROSS_ACCOUNT_ROLE" {
